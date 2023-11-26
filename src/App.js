@@ -7,6 +7,8 @@ import {
   Typography,
   Button,
   TextField,
+  AppBar,
+  Toolbar,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -36,95 +38,169 @@ function Signup() {
     phone: "",
   });
 
+  const handleInputChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   return (
-    <Container maxWidth="sm">
-      <CssBaseline />
+    <Container maxWidth="md" className="container">
+      <Container className="">
+        <CssBaseline />
 
-      <Box sx={{ p: 3 }}>
-        <Typography variant="h4" gutterBottom>
-          Sign Up
-        </Typography>
+        <Box sx={{ p: 3 }} className="signup">
+          <Typography variant="h4" gutterBottom>
+            <div className="text-center">
+              <p>Step 1</p>
+              <p>Your profile</p>
+              <p className="text-small">
+                Enter the login information for your account. You will be able
+                to create additional users after registering.
+              </p>
+            </div>
+          </Typography>
 
-        <form onSubmit={(e) => e.preventDefault()}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <TextField
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={(e) =>
-                  setFormData({ ...formData, firstName: e.target.value })
-                }
-              />
+          <form onSubmit={(e) => e.preventDefault()}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Box my={1}>
+                  <label htmlFor="firstName">First Name*</label>
+                </Box>
+                <TextField
+                  fullWidth
+                  placeholder="Input your first name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Box my={1}>
+                  <label htmlFor="lastName">Last Name*</label>
+                </Box>
+                <TextField
+                  fullWidth
+                  placeholder="Input your last name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Box my={1}>
+                  <label htmlFor="Email">Email*</label>
+                </Box>
+                <TextField
+                  fullWidth
+                  placeholder="Input your email"
+                  name="Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Box my={1}>
+                  <label htmlFor="PhoneNumber">Phone Number*</label>
+                </Box>
+                <TextField
+                  fullWidth
+                  placeholder="Input your phone number"
+                  name="PhoneNumber"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Box my={1}>
+                  <label htmlFor="Password">Password*</label>
+                </Box>
+                <TextField
+                  fullWidth
+                  placeholder="Input your password"
+                  name="Password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Box my={1}>
+                  <label htmlFor="RepeatPassword">Repeat Password*</label>
+                </Box>
+                <TextField
+                  fullWidth
+                  placeholder="Confirm your password"
+                  name="RepeatPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                />
+              </Grid>
             </Grid>
-
-            <Grid item xs={12} md={6}>
-              <TextField
-                label="Phone"
-                name="phone"
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone: e.target.value })
-                }
-              />
+          </form>
+        </Box>
+        <Container disableGutters>
+          <Grid
+            p={0}
+            display={"flex"}
+            justifyContent="space-between"
+            width={"100%"}
+            displayPrint="flex"
+          >
+            <Grid
+              item
+              xs={12}
+              md={6}
+              style={{
+                margin: "10px 0",
+                fontWeight: "bolder",
+              }}
+            >
+              <Button
+                type="submit"
+                variant="outlined"
+                style={{ textTransform: "none" }}
+              >
+                &lt; Back to Login
+              </Button>
             </Grid>
-
             <Grid item xs={12} md={6}>
-              <TextField
-                label="Email"
-                name="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-              />
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <TextField
-                label="Repeat Password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={(e) =>
-                  setFormData({ ...formData, confirmPassword: e.target.value })
-                }
-              />
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <TextField
-                label="Password"
-                name="password"
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-              />
-            </Grid>
-
-            <Grid item xs={12}>
               <Button
                 type="submit"
                 variant="contained"
-                style={{ textTransform: "none" }}
+                style={{ textTransform: "none", backgroundColor: "#261eb6" }}
               >
                 Sign up &gt;
               </Button>
             </Grid>
           </Grid>
-        </form>
-      </Box>
+        </Container>
+      </Container>
     </Container>
   );
 }
 
-const App = () => (
-  <>
-    <section>
+const Header = () => {
+  return (
+    <Grid
+      padding={5}
+      container
+      justifyContent="space-between"
+      style={{ color: "#ffff", fontWeight: "bolder" }}
+    >
+      <div> </div>
+      <h2>Create new Account</h2>
+      <div>Contact us</div>
+    </Grid>
+  );
+};
+
+const App = () => {
+  return (
+    <div className="wave-container">
+      <Header />
       <Signup />
-      <div className="curve" />
-    </section>
-  </>
-);
+    </div>
+  );
+};
 
 export default App;
