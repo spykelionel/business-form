@@ -38,6 +38,8 @@ function Signup() {
     phone: "",
   });
 
+  const [step, setStep] = useState(0);
+
   const handleInputChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -46,11 +48,60 @@ function Signup() {
       <Container className="">
         <CssBaseline />
 
+        <Container disableGutters>
+          <Grid
+            p={0}
+            display={"flex"}
+            justifyContent="space-between"
+            width={"100%"}
+            className="mini-header"
+          >
+            <Grid
+              className="active step-1 step"
+              display={"flex"}
+              justifyContent="center"
+              p="10px 0"
+            >
+              <Grid item xs={12} md={6} className="border-rounded done">
+                1
+              </Grid>
+              <Box alignSelf="center" pl={2}>
+                Your Profile
+              </Box>
+            </Grid>
+            <Grid
+              className="inactive step-2 incomplete step"
+              display={"flex"}
+              justifyContent="center"
+              p="10px 0"
+            >
+              <Grid item xs={12} md={6} className="border-rounded pending">
+                2
+              </Grid>
+              <Box alignSelf="center" pl={2}>
+                Business Information
+              </Box>
+            </Grid>
+            <Grid
+              className="step-3 incomplete step"
+              display={"flex"}
+              justifyContent="center"
+              p="10px 0"
+            >
+              <Grid item xs={12} md={6} className="border-rounded pending">
+                3
+              </Grid>
+              <Box alignSelf="center" pl={2}>
+                Additional Users
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
         <Box sx={{ p: 3 }} className="signup">
           <Typography variant="h4" gutterBottom>
             <div className="text-center">
-              <p>Step 1</p>
-              <p>Your profile</p>
+              <p className="text-disabled">Step 1</p>
+              <p className="text-bold">Your profile</p>
               <p className="text-small">
                 Enter the login information for your account. You will be able
                 to create additional users after registering.
@@ -87,12 +138,12 @@ function Signup() {
 
               <Grid item xs={12} md={6}>
                 <Box my={1}>
-                  <label htmlFor="Email">Email*</label>
+                  <label htmlFor="email">Email*</label>
                 </Box>
                 <TextField
                   fullWidth
                   placeholder="Input your email"
-                  name="Email"
+                  name="email"
                   value={formData.email}
                   onChange={handleInputChange}
                 />
@@ -100,24 +151,25 @@ function Signup() {
 
               <Grid item xs={12} md={6}>
                 <Box my={1}>
-                  <label htmlFor="PhoneNumber">Phone Number*</label>
+                  <label htmlFor="phone">Phone Number*</label>
                 </Box>
                 <TextField
+                  type="tel"
                   fullWidth
                   placeholder="Input your phone number"
-                  name="PhoneNumber"
+                  name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <Box my={1}>
-                  <label htmlFor="Password">Password*</label>
+                  <label htmlFor="password">Password*</label>
                 </Box>
                 <TextField
                   fullWidth
                   placeholder="Input your password"
-                  name="Password"
+                  name="password"
                   value={formData.password}
                   onChange={handleInputChange}
                 />
@@ -125,12 +177,12 @@ function Signup() {
 
               <Grid item xs={12} md={6}>
                 <Box my={1}>
-                  <label htmlFor="RepeatPassword">Repeat Password*</label>
+                  <label htmlFor="confirmPassword">Repeat Password*</label>
                 </Box>
                 <TextField
                   fullWidth
                   placeholder="Confirm your password"
-                  name="RepeatPassword"
+                  name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                 />
@@ -156,7 +208,7 @@ function Signup() {
               }}
             >
               <Button
-                type="submit"
+                type="button"
                 variant="outlined"
                 style={{ textTransform: "none" }}
               >
@@ -165,11 +217,14 @@ function Signup() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Button
-                type="submit"
+                type="button"
                 variant="contained"
-                style={{ textTransform: "none", backgroundColor: "#261eb6" }}
+                style={{
+                  textTransform: "none",
+                  backgroundColor: "#261eb6",
+                }}
               >
-                Sign up &gt;
+                Next step &gt;
               </Button>
             </Grid>
           </Grid>
