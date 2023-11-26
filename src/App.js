@@ -321,7 +321,7 @@ function Signup({
       setPercentageCompleted={setPercentageCompleted}
       byValue={byValue}
     >
-      <Box sx={{ p: 3 }} className="signup">
+      <Box sx={{ p: 3 }} className="form">
         <Legend
           step={step}
           title={"Your profile"}
@@ -443,7 +443,7 @@ const BusinessForm = ({
       setPercentageCompleted={setPercentageCompleted}
       byValue={byValue}
     >
-      <Box sx={{ p: 3 }} className="signup">
+      <Box sx={{ p: 3 }} className="form">
         <Legend
           step={step}
           title={"Business Information"}
@@ -561,20 +561,46 @@ const App = () => {
   const byValue = 100 / 3;
   const [percentageCompleted, setPercentageCompleted] = useState(byValue);
 
-  return (
-    <div className="wave-container">
-      <Header />
-      <Signup
-        step={step}
-        setStep={setStep}
-        completedSteps={completedSteps}
-        setCompletedSteps={setCompletedSteps}
-        percentageCompleted={percentageCompleted}
-        setPercentageCompleted={setPercentageCompleted}
-        byValue={byValue}
-      />
-    </div>
-  );
+  const props = {
+    step,
+    setStep,
+    completedSteps,
+    setCompletedSteps,
+    percentageCompleted,
+    setPercentageCompleted,
+    byValue,
+  };
+
+  switch (step) {
+    case 1:
+      return (
+        <div className="wave-container">
+          <Header />
+          <Signup {...props} />
+        </div>
+      );
+    case 2:
+      return (
+        <div className="wave-container">
+          <Header />
+          <BusinessForm {...props} />
+        </div>
+      );
+    case 3:
+      return (
+        <div className="wave-container">
+          <Header />
+          <BusinessForm {...props} />
+        </div>
+      );
+    default:
+      return (
+        <div className="wave-container">
+          <Header />
+          <Signup {...props} />
+        </div>
+      );
+  }
 };
 
 export default App;
