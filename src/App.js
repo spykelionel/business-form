@@ -115,6 +115,38 @@ const MiniHeader = ({ percentageCompleted, completedSteps }) => {
   );
 };
 
+const Layout = ({
+  percentageCompleted,
+  completedSteps,
+  step,
+  setStep,
+  setCompletedSteps,
+  setPercentageCompleted,
+  byValue,
+  children,
+}) => {
+  return (
+    <Container maxWidth="md" className="container">
+      <Container className="">
+        <CssBaseline />
+
+        <MiniHeader
+          percentageCompleted={percentageCompleted}
+          completedSteps={completedSteps}
+        />
+        {children}
+        <MiniFooter
+          step={step}
+          setStep={setStep}
+          setCompletedSteps={setCompletedSteps}
+          setPercentageCompleted={setPercentageCompleted}
+          byValue={byValue}
+        />
+      </Container>
+    </Container>
+  );
+};
+
 /**
  *
  * @param {0} step The current step
@@ -280,118 +312,227 @@ function Signup({
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
-    <Container maxWidth="md" className="container">
-      <Container className="">
-        <CssBaseline />
-
-        <MiniHeader
-          percentageCompleted={percentageCompleted}
-          completedSteps={completedSteps}
-        />
-        <Box sx={{ p: 3 }} className="signup">
-          <Typography variant="h4" gutterBottom>
-            <div className="text-center">
-              <p className="text-disabled">Step 1</p>
-              <p className="text-bold">Your profile</p>
-              <p className="text-small">
-                Enter the login information for your account. You will be able
-                to create additional users after registering.
-              </p>
-            </div>
-          </Typography>
-
-          <form onSubmit={(e) => e.preventDefault()}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <Box my={1}>
-                  <label htmlFor="firstName">First Name*</label>
-                </Box>
-                <TextField
-                  fullWidth
-                  placeholder="Input your first name"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box my={1}>
-                  <label htmlFor="lastName">Last Name*</label>
-                </Box>
-                <TextField
-                  fullWidth
-                  placeholder="Input your last name"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Box my={1}>
-                  <label htmlFor="email">Email*</label>
-                </Box>
-                <TextField
-                  fullWidth
-                  placeholder="Input your email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Box my={1}>
-                  <label htmlFor="phone">Phone Number*</label>
-                </Box>
-                <TextField
-                  type="tel"
-                  fullWidth
-                  placeholder="Input your phone number"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box my={1}>
-                  <label htmlFor="password">Password*</label>
-                </Box>
-                <TextField
-                  fullWidth
-                  placeholder="Input your password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Box my={1}>
-                  <label htmlFor="confirmPassword">Repeat Password*</label>
-                </Box>
-                <TextField
-                  fullWidth
-                  placeholder="Confirm your password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-            </Grid>
-          </form>
-        </Box>
-        <MiniFooter
+    <Layout
+      step={step}
+      setStep={setStep}
+      completedSteps={completedSteps}
+      setCompletedSteps={setCompletedSteps}
+      percentageCompleted={percentageCompleted}
+      setPercentageCompleted={setPercentageCompleted}
+      byValue={byValue}
+    >
+      <Box sx={{ p: 3 }} className="signup">
+        <Legend
           step={step}
-          setStep={setStep}
-          setCompletedSteps={setCompletedSteps}
-          setPercentageCompleted={setPercentageCompleted}
-          byValue={byValue}
+          title={"Your profile"}
+          description="  Enter the login information for your account. You will be able to
+          create additional users after registering."
         />
-      </Container>
-    </Container>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="firstName">First Name*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your first name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="lastName">Last Name*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your last name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="email">Email*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="phone">Phone Number*</label>
+              </Box>
+              <TextField
+                type="tel"
+                fullWidth
+                placeholder="Input your phone number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="password">Password*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="confirmPassword">Repeat Password*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Confirm your password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+              />
+            </Grid>
+          </Grid>
+        </form>
+      </Box>
+    </Layout>
   );
 }
+
+const BusinessForm = ({
+  step,
+  setStep,
+  completedSteps,
+  setCompletedSteps,
+  percentageCompleted,
+  setPercentageCompleted,
+  byValue,
+}) => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+  });
+
+  const handleInputChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  return (
+    <Layout
+      step={step}
+      setStep={setStep}
+      completedSteps={completedSteps}
+      setCompletedSteps={setCompletedSteps}
+      percentageCompleted={percentageCompleted}
+      setPercentageCompleted={setPercentageCompleted}
+      byValue={byValue}
+    >
+      <Box sx={{ p: 3 }} className="signup">
+        <Legend
+          step={step}
+          title={"Business Information"}
+          description="Please enter information about your company"
+        />
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="firstName">First Name*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your first name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="lastName">Last Name*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your last name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="email">Email*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="phone">Phone Number*</label>
+              </Box>
+              <TextField
+                type="tel"
+                fullWidth
+                placeholder="Input your phone number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="password">Password*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Input your password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Box my={1}>
+                <label htmlFor="confirmPassword">Repeat Password*</label>
+              </Box>
+              <TextField
+                fullWidth
+                placeholder="Confirm your password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+              />
+            </Grid>
+          </Grid>
+        </form>
+      </Box>
+    </Layout>
+  );
+};
 
 const Header = () => {
   return (
