@@ -7,10 +7,10 @@ import {
   Typography,
   Button,
   TextField,
-  AppBar,
-  Toolbar,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import cat from "./cat.jpeg";
+import { red } from "@mui/material/colors";
 
 const theme = createTheme({
   components: {
@@ -28,7 +28,88 @@ const theme = createTheme({
   },
 });
 
-function Signup() {
+const MiniHeader = ({
+  isActive,
+  isComplete,
+  currentStep,
+  percentageCompleted,
+  completedSteps,
+}) => {
+  console.log(JSON.stringify(completedSteps));
+  return (
+    <Container disableGutters className="relative">
+      <Grid
+        p={0}
+        display={"flex"}
+        justifyContent="space-between"
+        width={"100%"}
+        className="mini-header"
+      >
+        <Grid
+          className={
+            completedSteps?.one ? "step completed" : `` + " incomplete step"
+          }
+          display={"flex"}
+          justifyContent="center"
+          p="10px 0"
+        >
+          <Grid item xs={12} md={6} className="border-rounded done">
+            1
+          </Grid>
+          <Box alignSelf="center" pl={2}>
+            Your Profile
+          </Box>
+        </Grid>
+        <Grid
+          className={
+            completedSteps?.two ? "step completed" : `` + " incomplete step"
+          }
+          display={"flex"}
+          justifyContent="center"
+          p="10px 0"
+        >
+          <Grid item xs={12} md={6} className={`border-rounded done pending`}>
+            2
+          </Grid>
+          <Box alignSelf="center" pl={2}>
+            Business Information
+          </Box>
+        </Grid>
+        <Grid
+          className={
+            completedSteps?.three ? "step completed" : `` + " incomplete step"
+          }
+          display={"flex"}
+          justifyContent="center"
+          p="10px 0"
+        >
+          <Grid item xs={12} md={6} className="border-rounded done pending">
+            3
+          </Grid>
+          <Box alignSelf="center" pl={2}>
+            Additional Users
+          </Box>
+        </Grid>
+      </Grid>
+      {completedSteps?.three ? (
+        <Box
+          className="absolute onboarding-completed"
+          width={`${percentageCompleted}%`}
+        />
+      ) : (
+        <Box className="absolute" width={`${percentageCompleted}%`} />
+      )}
+      <Box
+        className={
+          `absolute ` + completedSteps?.three && " onboarding-completed"
+        }
+        width={`${percentageCompleted}%`}
+      />
+    </Container>
+  );
+};
+
+function Signup({ isActive, isComplete }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -38,7 +119,14 @@ function Signup() {
     phone: "",
   });
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState({
+    one: true,
+    two: false,
+    three: false,
+  });
+  const byValue = 100 / 3;
+  const [percentageCompleted, setPercentageCompleted] = useState(byValue);
 
   const handleInputChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,55 +136,11 @@ function Signup() {
       <Container className="">
         <CssBaseline />
 
-        <Container disableGutters>
-          <Grid
-            p={0}
-            display={"flex"}
-            justifyContent="space-between"
-            width={"100%"}
-            className="mini-header"
-          >
-            <Grid
-              className="active step-1 step"
-              display={"flex"}
-              justifyContent="center"
-              p="10px 0"
-            >
-              <Grid item xs={12} md={6} className="border-rounded done">
-                1
-              </Grid>
-              <Box alignSelf="center" pl={2}>
-                Your Profile
-              </Box>
-            </Grid>
-            <Grid
-              className="inactive step-2 incomplete step"
-              display={"flex"}
-              justifyContent="center"
-              p="10px 0"
-            >
-              <Grid item xs={12} md={6} className="border-rounded pending">
-                2
-              </Grid>
-              <Box alignSelf="center" pl={2}>
-                Business Information
-              </Box>
-            </Grid>
-            <Grid
-              className="step-3 incomplete step"
-              display={"flex"}
-              justifyContent="center"
-              p="10px 0"
-            >
-              <Grid item xs={12} md={6} className="border-rounded pending">
-                3
-              </Grid>
-              <Box alignSelf="center" pl={2}>
-                Additional Users
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
+        <MiniHeader
+          isActive={isActive}
+          percentageCompleted={percentageCompleted}
+          completedSteps={completedSteps}
+        />
         <Box sx={{ p: 3 }} className="signup">
           <Typography variant="h4" gutterBottom>
             <div className="text-center">
@@ -223,6 +267,31 @@ function Signup() {
                   textTransform: "none",
                   backgroundColor: "#261eb6",
                 }}
+                onClick={() => {
+                  setStep((prev) => prev + 1);
+                  console.log(step);
+                  setCompletedSteps((prev) => {
+                    switch (step) {
+                      case 1:
+                        setCompletedSteps({ ...prev, two: true });
+                        break;
+                      case 2:
+                        setCompletedSteps({ ...prev, three: true });
+                        break;
+                      default:
+                        setStep(1);
+                        setCompletedSteps({
+                          one: true,
+                          two: false,
+                          three: false,
+                        });
+                        break;
+                    }
+                  });
+                  setPercentageCompleted((prev) =>
+                    prev < 100 ? prev + byValue : byValue
+                  );
+                }}
               >
                 Next step &gt;
               </Button>
@@ -237,14 +306,16 @@ function Signup() {
 const Header = () => {
   return (
     <Grid
-      padding={5}
+      padding={3}
       container
       justifyContent="space-between"
       style={{ color: "#ffff", fontWeight: "bolder" }}
     >
-      <div> </div>
-      <h2>Create new Account</h2>
-      <div>Contact us</div>
+      <div className="mue-cat">
+        <img src={cat} />
+      </div>
+      <h2 className="self-center">Create new Account</h2>
+      <div className="self-center">Contact us</div>
     </Grid>
   );
 };
