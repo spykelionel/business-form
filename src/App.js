@@ -28,6 +28,18 @@ const theme = createTheme({
   },
 });
 
+const Legend = ({ step, title, description }) => {
+  return (
+    <Typography variant="h4" gutterBottom>
+      <div className="text-center">
+        <p className="text-disabled">Step {step}</p>
+        <p className="text-bold">{title}</p>
+        <p className="text-small">{description}</p>
+      </div>
+    </Typography>
+  );
+};
+
 const MiniHeader = ({ percentageCompleted, completedSteps }) => {
   console.log(JSON.stringify(completedSteps));
   return (
