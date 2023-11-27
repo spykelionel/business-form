@@ -127,3 +127,17 @@ body {
 .onboarding-completed {
   border-radius: 15px 15px 0px 0px;
 }
+
+.text-info {
+  color: #59a3fa;
+  font-weight: bold;
+}
+
+.text-white > span {
+  color: #fff !important;
+}
+
+.rounded > span {
+  border-radius: 50% !important;
+  padding: 10px !important;
+}
