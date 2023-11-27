@@ -14,7 +14,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import cat from "./cat.jpeg";
-import { CloseSharp, QuestionMarkOutlined } from "@mui/icons-material";
+import { CloseSharp, QuestionMarkOutlined, Check } from "@mui/icons-material";
 import { useAppContext } from "./AppContext";
 
 const Legend = ({ step, title, description }) => {
@@ -270,19 +270,11 @@ const MiniFooter = ({
 };
 
 function Signup() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    phone: "",
-  });
+  const { step, formData, updateFormData } = useAppContext();
 
-  const { step } = useAppContext();
-
-  const handleInputChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleInputChange = (e) => {
+    updateFormData("step1", { [e.target.name]: e.target.value });
+  };
 
   return (
     <Layout>
@@ -354,6 +346,7 @@ function Signup() {
                 fullWidth
                 placeholder="Input your password"
                 name="password"
+                type="password"
                 value={formData.password}
                 onChange={handleInputChange}
               />
@@ -367,6 +360,7 @@ function Signup() {
                 fullWidth
                 placeholder="Confirm your password"
                 name="confirmPassword"
+                type="password"
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
               />
@@ -378,27 +372,35 @@ function Signup() {
   );
 }
 
-const BusinessForm = ({
-  step,
-  setStep,
-  completedSteps,
-  setCompletedSteps,
-  percentageCompleted,
-  setPercentageCompleted,
-  byValue,
-}) => {
-  const [formData, setFormData] = useState({
-    brandName: "",
-    brandType: "",
-    streetAddress: "",
-    city: "",
-    zipCode: "",
-    taxIdNumber: "",
-  });
+const BusinessForm = () => {
+  // const [formData, setFormData] = useState({
+  //   brandName: "",
+  //   brandType: "",
+  //   streetAddress: "",
+  //   city: "",
+  //   zipCode: "",
+  //   taxIdNumber: "",
+  // });
+
+  const {
+    step,
+    setStep,
+    completedSteps,
+    setCompletedSteps,
+    percentageCompleted,
+    setPercentageCompleted,
+    byValue,
+    formData,
+    updateFormData,
+  } = useAppContext();
+
+  const handleInputChange = (e) => {
+    updateFormData("step2", { [e.target.name]: e.target.value });
+  };
 
   const tooltipTitle = `
   Local: Brands with distribution in 3 divisions or less 
-  OR multiple divisions or a total of 50 stores or less.\n\n
+  OR multiple divisions or a total of 50 stores or less.\n
 
   National: Brands with distributions with in 4 or more 
   divisions or in more than 150 stores.
@@ -417,8 +419,7 @@ const BusinessForm = ({
       label: "฿",
     },
   ];
-  const handleInputChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   return (
     <Layout
       step={step}
@@ -480,7 +481,10 @@ const BusinessForm = ({
                 fullWidth
                 id="outlined-select-currency"
                 select
-                defaultValue="Apple"
+                defaultValue=""
+                value={formData.brandType}
+                onChange={handleInputChange}
+                name="brandType"
               >
                 {brands.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -566,7 +570,7 @@ const BusinessForm = ({
                 <Grid item md={10}>
                   <OutlinedInput
                     fullWidth
-                    id="outlined-adornment-password"
+                    id="outlined-adornment-input"
                     // disabled
                     value="Electronically signed the agreement(s)"
                     endAdornment={
@@ -618,7 +622,7 @@ const BusinessForm = ({
                 <Grid item md={10}>
                   <OutlinedInput
                     fullWidth
-                    id="outlined-adornment-password"
+                    id="outlined-adornment-input-2"
                     // disabled
                     value="No Adult Beverage Kroger market supplier waiver and release"
                     endAdornment={
@@ -682,7 +686,7 @@ const BusinessForm = ({
                 <Grid item md={10}>
                   <OutlinedInput
                     fullWidth
-                    id="outlined-adornment-password"
+                    id="outlined-adornment-input-3"
                     // disabled
                     value="Electronically signed the agreement(s)"
                     endAdornment={
