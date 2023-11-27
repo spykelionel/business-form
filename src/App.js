@@ -373,15 +373,6 @@ function Signup() {
 }
 
 const BusinessForm = () => {
-  // const [formData, setFormData] = useState({
-  //   brandName: "",
-  //   brandType: "",
-  //   streetAddress: "",
-  //   city: "",
-  //   zipCode: "",
-  //   taxIdNumber: "",
-  // });
-
   const {
     step,
     setStep,
@@ -749,16 +740,24 @@ const Header = () => {
   );
 };
 
+const Summary = () => {
+  const { step, formData } = useAppContext();
+  console.clear();
+  console.log(formData);
+  return (
+    <Layout>
+      <Box sx={{ p: 3 }} className="form">
+        <Legend step={step} title={"Information"} description="Your Data" />
+        <Grid container>
+          <pre className="text-info">{JSON.stringify(formData, null, 2)}</pre>
+        </Grid>
+      </Box>
+    </Layout>
+  );
+};
+
 const App = () => {
-  const {
-    step,
-    setStep,
-    completedSteps,
-    setCompletedSteps,
-    percentageCompleted,
-    setPercentageCompleted,
-    byValue,
-  } = useAppContext();
+  const { step } = useAppContext();
 
   switch (step) {
     case 1:
@@ -779,7 +778,7 @@ const App = () => {
       return (
         <div className="wave-container">
           <Header />
-          <BusinessForm />
+          <Summary />
         </div>
       );
     default:
