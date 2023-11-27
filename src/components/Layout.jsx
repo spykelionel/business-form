@@ -20,13 +20,7 @@ const Layout = ({ children }) => {
 
         <MiniHeader />
         {children}
-        <MiniFooter
-          step={step}
-          setStep={setStep}
-          setCompletedSteps={setCompletedSteps}
-          setPercentageCompleted={setPercentageCompleted}
-          byValue={byValue}
-        />
+        <MiniFooter />
       </Container>
     </Container>
   );
