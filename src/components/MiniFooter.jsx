@@ -3,15 +3,6 @@ import useAppContext from "../hooks/useAppContext";
 
 import { Container, Grid, Button } from "@mui/material";
 
-/**
- *
- * @param {0} step The current step
- * @param {1} setStep Function to set the step
- * @param {2} setCompletedSteps Function to set the number of completed steps
- * @param {3} setPercentageCompleted Function to set the overall number of steps completed
- * @param {4} byValue Value in which the percentage completed in based upon (100/totalSteps)
- * @returns React.JSX.Element
- */
 const MiniFooter = () => {
   const { step, setStep, setCompletedSteps, setPercentageCompleted, byValue } =
     useAppContext();
