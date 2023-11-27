@@ -12,7 +12,7 @@ const Signup = () => {
   const { step, formData, updateFormData } = useAppContext();
 
   const handleInputChange = (e) => {
-    updateFormData("step1", { [e.target.name]: e.target.value });
+    updateFormData("your-profile", { [e.target.name]: e.target.value });
   };
 
   return (

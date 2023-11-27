@@ -36,7 +36,7 @@ const BusinessForm = () => {
   } = useAppContext();
 
   const handleInputChange = (e) => {
-    updateFormData("step2", { [e.target.name]: e.target.value });
+    updateFormData("business-information", { [e.target.name]: e.target.value });
   };
 
   const tooltipTitle = `

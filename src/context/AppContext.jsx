@@ -13,7 +13,7 @@ export const AppProvider = ({ children }) => {
   const [percentageCompleted, setPercentageCompleted] = useState(byValue);
 
   const [formData, setFormData] = useState({
-    step1: {
+    "your-profile": {
       firstName: "",
       lastName: "",
       email: "",
@@ -21,7 +21,7 @@ export const AppProvider = ({ children }) => {
       confirmPassword: "",
       phone: "",
     },
-    step2: {
+    "business-information": {
       brandName: "",
       brandType: "",
       streetAddress: "",
