@@ -105,15 +105,8 @@ const MiniHeader = () => {
 };
 
 const Layout = ({ children }) => {
-  const {
-    step,
-    setStep,
-    completedSteps,
-    setCompletedSteps,
-    percentageCompleted,
-    setPercentageCompleted,
-    byValue,
-  } = useAppContext();
+  const { step, setStep, setCompletedSteps, setPercentageCompleted, byValue } =
+    useAppContext();
   return (
     <Container maxWidth="md" className="container">
       <Container className="">
