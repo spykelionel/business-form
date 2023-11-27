@@ -4,6 +4,10 @@ import { TextField, Grid, Box } from "@mui/material";
 import Layout from "./Layout";
 import Legend from "./Legend";
 
+/**
+ * Signup component for user registration.
+ * @returns {React.ReactNode} - Rendered signup component.
+ */
 const Signup = () => {
   const { step, formData, updateFormData } = useAppContext();
 
@@ -106,5 +110,7 @@ const Signup = () => {
     </Layout>
   );
 };
+
+Signup.propTypes = {};
 
 export default Signup;

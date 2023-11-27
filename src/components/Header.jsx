@@ -2,6 +2,10 @@ import React from "react";
 import { Grid } from "@mui/material";
 import cat from "../assets/cat.jpeg";
 
+/**
+ * Header component for displaying the header of the application.
+ * @returns {React.ReactNode} - Rendered Header component.
+ */
 const Header = () => {
   return (
     <Grid
@@ -18,5 +22,7 @@ const Header = () => {
     </Grid>
   );
 };
+
+Header.propTypes = {};
 
 export default Header;

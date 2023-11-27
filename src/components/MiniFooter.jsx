@@ -3,6 +3,10 @@ import useAppContext from "../hooks/useAppContext";
 
 import { Container, Grid, Button } from "@mui/material";
 
+/**
+ * MiniFooter component for displaying a mini footer with navigation buttons.
+ * @returns {React.ReactNode} - Rendered MiniFooter component.
+ */
 const MiniFooter = () => {
   const { step, setStep, setCompletedSteps, setPercentageCompleted, byValue } =
     useAppContext();
@@ -132,5 +136,7 @@ const MiniFooter = () => {
     </Container>
   );
 };
+
+MiniFooter.propTypes = {};
 
 export default MiniFooter;

@@ -2,6 +2,10 @@ import React from "react";
 import useAppContext from "../hooks/useAppContext";
 import { Container, Box, Grid } from "@mui/material";
 
+/**
+ * MiniHeader component for displaying a mini header with completion steps.
+ * @returns {React.ReactNode} - Rendered MiniHeader component.
+ */
 const MiniHeader = () => {
   const { completedSteps, percentageCompleted } = useAppContext();
   return (
@@ -76,5 +80,7 @@ const MiniHeader = () => {
     </Container>
   );
 };
+
+MiniHeader.propTypes = {};
 
 export default MiniHeader;

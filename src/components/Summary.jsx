@@ -1,10 +1,13 @@
 import React from "react";
-
 import useAppContext from "../hooks/useAppContext";
 import { Box, Grid } from "@mui/material";
 import Legend from "./Legend";
 import Layout from "./Layout";
 
+/**
+ * Summary component to display information.
+ * @returns {React.ReactNode} - Rendered summary component.
+ */
 const Summary = () => {
   const { step, formData } = useAppContext();
   console.clear();
@@ -20,5 +23,7 @@ const Summary = () => {
     </Layout>
   );
 };
+
+Summary.propTypes = {};
 
 export default Summary;
