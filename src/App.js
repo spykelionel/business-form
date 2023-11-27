@@ -25,6 +25,8 @@ import {
   VisibilityOff,
 } from "@mui/icons-material";
 
+import { useAppContext } from "./AppContext";
+
 const theme = createTheme({
   components: {
     MuiContainer: {
@@ -53,8 +55,8 @@ const Legend = ({ step, title, description }) => {
   );
 };
 
-const MiniHeader = ({ percentageCompleted, completedSteps }) => {
-  console.log(JSON.stringify(completedSteps));
+const MiniHeader = () => {
+  const { completedSteps, percentageCompleted } = useAppContext();
   return (
     <Container disableGutters className="relative">
       <Grid
@@ -128,25 +130,22 @@ const MiniHeader = ({ percentageCompleted, completedSteps }) => {
   );
 };
 
-const Layout = ({
-  percentageCompleted,
-  completedSteps,
-  step,
-  setStep,
-  setCompletedSteps,
-  setPercentageCompleted,
-  byValue,
-  children,
-}) => {
+const Layout = ({ children }) => {
+  const {
+    step,
+    setStep,
+    completedSteps,
+    setCompletedSteps,
+    percentageCompleted,
+    setPercentageCompleted,
+    byValue,
+  } = useAppContext();
   return (
     <Container maxWidth="md" className="container">
       <Container className="">
         <CssBaseline />
 
-        <MiniHeader
-          percentageCompleted={percentageCompleted}
-          completedSteps={completedSteps}
-        />
+        <MiniHeader />
         {children}
         <MiniFooter
           step={step}
@@ -303,15 +302,7 @@ const MiniFooter = ({
   );
 };
 
-function Signup({
-  step,
-  setStep,
-  completedSteps,
-  setCompletedSteps,
-  percentageCompleted,
-  setPercentageCompleted,
-  byValue,
-}) {
+function Signup() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -321,19 +312,13 @@ function Signup({
     phone: "",
   });
 
+  const { step } = useAppContext();
+
   const handleInputChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
-    <Layout
-      step={step}
-      setStep={setStep}
-      completedSteps={completedSteps}
-      setCompletedSteps={setCompletedSteps}
-      percentageCompleted={percentageCompleted}
-      setPercentageCompleted={setPercentageCompleted}
-      byValue={byValue}
-    >
+    <Layout>
       <Box sx={{ p: 3 }} className="form">
         <Legend
           step={step}
@@ -794,16 +779,7 @@ const Header = () => {
 };
 
 const App = () => {
-  const [step, setStep] = useState(1);
-  const [completedSteps, setCompletedSteps] = useState({
-    one: true,
-    two: false,
-    three: false,
-  });
-  const byValue = 100 / 3;
-  const [percentageCompleted, setPercentageCompleted] = useState(byValue);
-
-  const props = {
+  const {
     step,
     setStep,
     completedSteps,
@@ -811,35 +787,35 @@ const App = () => {
     percentageCompleted,
     setPercentageCompleted,
     byValue,
-  };
+  } = useAppContext();
 
   switch (step) {
     case 1:
       return (
         <div className="wave-container">
           <Header />
-          <Signup {...props} />
+          <Signup />
         </div>
       );
     case 2:
       return (
         <div className="wave-container">
           <Header />
-          <BusinessForm {...props} />
+          <BusinessForm />
         </div>
       );
     case 3:
       return (
         <div className="wave-container">
           <Header />
-          <BusinessForm {...props} />
+          <BusinessForm />
         </div>
       );
     default:
       return (
         <div className="wave-container">
           <Header />
-          <Signup {...props} />
+          <Signup />
         </div>
       );
   }
