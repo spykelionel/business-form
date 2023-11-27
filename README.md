@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Design Credits: [https://dribbble.com/shots/6792188-Registration-Form](https://dribbble.com/shots/6792188-Registration-Form)
+
 ## Available Scripts
 
 In the project directory, you can run:
