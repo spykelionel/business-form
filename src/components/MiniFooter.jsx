@@ -133,7 +133,7 @@ const MiniFooter = () => {
               style={{ textTransform: "none", backgroundColor: "#261eb6" }}
               onClick={handleNextButtonClicked}
             >
-              Next Step &gt;
+              {step === 2 ? "Submit" : <>Next Step &gt;</>}
             </Button>
           </Grid>
         </Grid>
