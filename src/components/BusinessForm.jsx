@@ -18,6 +18,10 @@ import {
 
 import useAppContext from "../hooks/useAppContext";
 
+/**
+ * BusinessForm component for accepting the Business information of the application.
+ * @returns {React.ReactNode} - Rendered BusinessForm component.
+ */
 const BusinessForm = () => {
   const {
     step,
@@ -324,7 +328,6 @@ const BusinessForm = () => {
                   <OutlinedInput
                     fullWidth
                     id="outlined-adornment-input-3"
-                    // disabled
                     value="Electronically signed the agreement(s)"
                     endAdornment={
                       <InputAdornment position="end">
@@ -348,14 +351,12 @@ const BusinessForm = () => {
                   <Button
                     type="button"
                     variant="contained"
-                    // disabled={step === 3}
                     style={{
                       textTransform: "none",
                       backgroundColor: "#261eb6",
                       height: "100%",
                       fontWeight: "bold",
                     }}
-                    // onClick={handleNextButtonClicked}
                   >
                     &gt;
                   </Button>
@@ -368,5 +369,7 @@ const BusinessForm = () => {
     </Layout>
   );
 };
+
+BusinessForm.propTypes = {};
 
 export default BusinessForm;
