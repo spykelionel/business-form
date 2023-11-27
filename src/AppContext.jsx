@@ -12,6 +12,37 @@ export const AppProvider = ({ children }) => {
   const byValue = 100 / 3;
   const [percentageCompleted, setPercentageCompleted] = useState(byValue);
 
+  const [formData, setFormData] = useState({
+    step1: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phone: "",
+    },
+    step2: {
+      brandName: "",
+      brandType: "",
+      streetAddress: "",
+      city: "",
+      zipCode: "",
+      taxIdNumber: "",
+    },
+    step3: {},
+  });
+
+  const updateFormData = (step, data) => {
+    console.log(data);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [step]: {
+        ...prevFormData[step],
+        ...data,
+      },
+    }));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -22,6 +53,8 @@ export const AppProvider = ({ children }) => {
         percentageCompleted,
         setPercentageCompleted,
         byValue,
+        formData,
+        updateFormData,
       }}
     >
       {children}
