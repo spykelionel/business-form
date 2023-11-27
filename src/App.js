@@ -13,35 +13,9 @@ import {
   InputAdornment,
   MenuItem,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import cat from "./cat.jpeg";
-import {
-  Cancel,
-  CancelOutlined,
-  Check,
-  CloseSharp,
-  QuestionMarkOutlined,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
-
+import { CloseSharp, QuestionMarkOutlined } from "@mui/icons-material";
 import { useAppContext } from "./AppContext";
-
-const theme = createTheme({
-  components: {
-    MuiContainer: {
-      styleOverrides: {
-        root: {
-          background: "skyblue",
-          backgroundImage:
-            "linear-gradient(135deg, skyblue 60%, transparent 0%)",
-          height: "100vh",
-          width: "100vw",
-        },
-      },
-    },
-  },
-});
 
 const Legend = ({ step, title, description }) => {
   return (
